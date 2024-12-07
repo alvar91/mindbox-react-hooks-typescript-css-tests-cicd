@@ -6,7 +6,7 @@ import { FilterValues, Task } from "../models/interfaces";
 import "./App.css";
 
 export const initialState: Task[] = [
-  { id: 1, completed: false, title: "Тестовое задание" },
+  { id: 1, completed: false, title: "ТестовоBUG задание" },
   { id: 2, completed: true, title: "Прекрасный код" },
   { id: 3, completed: false, title: "Покрытие тестами" },
 ];
