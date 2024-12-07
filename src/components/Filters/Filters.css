@@ -1,0 +1,32 @@
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px;
+}
+
+.filters__left-tasks {
+  font-size: 14px;
+}
+
+.filters button {
+  font-size: 14px;
+}
+
+.filters__states {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.filters__states-item {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 3px 10px;
+}
+
+.filters__states-item.selected {
+  border-color: #c5c5c5;
+}
