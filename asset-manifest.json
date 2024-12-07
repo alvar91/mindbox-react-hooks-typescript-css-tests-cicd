@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mindbox-react-hooks-typescript-css-tests-cicd/static/css/main.2a1a9341.css",
+    "main.js": "/mindbox-react-hooks-typescript-css-tests-cicd/static/js/main.91779b74.js",
+    "index.html": "/mindbox-react-hooks-typescript-css-tests-cicd/index.html",
+    "main.2a1a9341.css.map": "/mindbox-react-hooks-typescript-css-tests-cicd/static/css/main.2a1a9341.css.map",
+    "main.91779b74.js.map": "/mindbox-react-hooks-typescript-css-tests-cicd/static/js/main.91779b74.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a1a9341.css",
+    "static/js/main.91779b74.js"
+  ]
+}
