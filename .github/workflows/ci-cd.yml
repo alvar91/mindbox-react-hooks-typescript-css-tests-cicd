@@ -1,64 +1,64 @@
-name: CI/CD
+name: CI/CD  # Название рабочего процесса CI/CD
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on:  # Определяет, при каких событиях запускается процесс
+  push:  # Запускается при пуше в репозиторий
+    branches: [ master ]  # Событие срабатывает только для ветки master
+  pull_request:  # Запускается при создании или обновлении pull request
+    branches: [ master ]  # Событие срабатывает только для ветки master
 
-jobs:
-  build:
-    name: Build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
-        node-version:
-          - 16
+jobs:  # Определение рабочих процессов (jobs), которые будут выполняться
+  build:  # Рабочий процесс "build"
+    name: Build  # Название рабочего процесса
+    runs-on: ${{ matrix.os }}  # Операционная система, которая будет использоваться для выполнения рабочего процесса (указано через matrix)
+    strategy:  # Стратегия для выполнения рабочих процессов на разных системах
+      matrix:  # Матричный запуск рабочих процессов
+        os:  # Перечень операционных систем, на которых будет запускаться процесс
+          - ubuntu-latest  # Ubuntu
+          - macos-latest  # macOS
+          - windows-latest  # Windows
+        node-version:  # Перечень версий Node.js, которые будут использоваться
+          - 16  # Версия Node.js 16
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Install NPM packages
-      run: npm install
-    
-    - name: Build project
-      run: npm run build
-    
-    - name: Run tests
-      run: npm run test
+    steps:  # Шаги, которые выполняются в рамках этого рабочего процесса
+    - name: Checkout code  # Шаг для извлечения кода из репозитория
+      uses: actions/checkout@v2  # Использует GitHub Action для клонирования репозитория
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Install Node.js  # Шаг для установки Node.js
+      uses: actions/setup-node@v2  # Использует GitHub Action для установки Node.js
+      with:  # Параметры для установки
+        node-version: ${{ matrix.node-version }}  # Указывает версию Node.js из матрицы
 
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+    - name: Install NPM packages  # Шаг для установки зависимостей через npm
+      run: npm install  # Запуск команды npm install для установки зависимостей
 
-    - name: Install NPM packages
-      run: npm install
+    - name: Build project  # Шаг для сборки проекта
+      run: npm run build  # Запуск команды npm run build для сборки проекта
 
-    - name: Build project
-      run: npm run build
+    - name: Run tests  # Шаг для запуска тестов
+      run: npm run test  # Запуск команды npm run test для выполнения тестов
 
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+  deploy:  # Рабочий процесс "deploy"
+    name: Deploy  # Название рабочего процесса
+    needs: build  # Указывает, что этот рабочий процесс зависит от успешного завершения "build"
+    runs-on: ubuntu-latest  # Рабочий процесс будет выполняться на Ubuntu
+
+    steps:  # Шаги для развертывания
+    - name: Checkout code  # Шаг для извлечения кода из репозитория
+      uses: actions/checkout@v2  # Использует GitHub Action для клонирования репозитория
+
+    - name: Install Node.js  # Шаг для установки Node.js
+      uses: actions/setup-node@v2  # Использует GitHub Action для установки Node.js
+      with:  # Параметры для установки
+        node-version: ${{ matrix.node-version }}  # Указывает версию Node.js из матрицы
+
+    - name: Install NPM packages  # Шаг для установки зависимостей через npm
+      run: npm install  # Запуск команды npm install для установки зависимостей
+
+    - name: Build project  # Шаг для сборки проекта
+      run: npm run build  # Запуск команды npm run build для сборки проекта
+
+    - name: Deploy to gh-pages  # Шаг для развертывания на GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3  # Использует GitHub Action для деплоя на GitHub Pages
+      with:  # Параметры для деплоя
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Токен для аутентификации на GitHub
+        publish_dir: ./build  # Путь к директории, которую нужно опубликовать (собранный проект)
